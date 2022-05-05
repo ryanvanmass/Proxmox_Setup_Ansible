@@ -12,3 +12,19 @@
           name: Forward 8006 to port 80
           special_time: reboot
           job: /usr/sbin/iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8006
+  
+  - name: Install Core Utilities
+    hosts: localhost
+    tasks:
+      - name: Update Cache
+        apt:
+          update_cache: yes
+      - name: Terminal Utilies
+        apt: 
+          name:
+            - iotop
+            - iftop
+            - htop
+            - vim
+            - git
+          state: latest
