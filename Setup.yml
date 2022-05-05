@@ -1,0 +1,14 @@
+---
+  - name: Port Forwarding
+    hosts: localhost
+    tasks:
+      - name: 443
+        cron:
+          name: Forward 8006 to port 443
+          special_time: reboot
+          job: /usr/sbin/iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 8006
+      - name: 80
+        cron:
+          name: Forward 8006 to port 80
+          special_time: reboot
+          job: /usr/sbin/iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8006
